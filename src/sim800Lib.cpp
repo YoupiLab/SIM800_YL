@@ -80,7 +80,7 @@ int Sim800Lib::getMaxiMsgCount() {
   }
 }
 
-int Sim800Lib::getStayMsgCount() { return (getMaxiMsgCount() - getMsgCount()); }
+int Sim800Lib::getRemainingMessage() { return (getMaxiMsgCount() - getMsgCount()); }
 
 Sim800Lib::Sim800Lib(int rx,
                      int tx)  // This is the constructor of the class with its initializations
@@ -127,7 +127,7 @@ void Sim800Lib::sendSMS(String number, String msg) {
   delay(waitingTime);
 }
 
-void Sim800Lib::doCall(String number) {
+void Sim800Lib::makeCall(String number) {
   mySerial->println("AT");           // AT is done to make sure the module works
   Serial.println(get_result(true));  // The module's response is displayed in the serial monitor
   delay(waitingTime);                // waiting time

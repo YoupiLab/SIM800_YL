@@ -1,0 +1,24 @@
+#######################################
+# Syntax Coloring Map For SIM800L
+#######################################
+
+#######################################
+# Datatypes (KEYWORD1)
+#######################################
+
+VeriyToConnectWifi KEYWORD1
+checkMyAdressIp KEYWORD1
+
+
+#######################################
+# Methods and Functions (KEYWORD2)
+#######################################
+
+getPassword	KEYWORD2
+sendDataFloat KEYWORD2
+dynamicExecution KEYWORD2
+
+#######################################
+# Instances (KEYWORD2)
+
+# Constants (LITERAL1)

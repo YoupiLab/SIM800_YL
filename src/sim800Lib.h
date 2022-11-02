@@ -23,10 +23,10 @@ class Sim800Lib {
   void    setKeyWord(String word);
   int     getMsgCount();
   int     getMaxiMsgCount();
-  int     getStayMsgCount();
+  int     getRemainingMessage(); //
   void    startModule();
   void    sendSMS(String number, String msg);
-  void    doCall(String number);
+  void    makeCall(String number);
   int     inListening(String number = "");
   String  getUSSDRequest(String request);
   String  getAllMsg();

@@ -2,7 +2,6 @@
 
 Sim800Lib Sim(10,11);// Le module est connecté aux pins
 
-void doCall(String number);
 int response=9;
 
 void setup() 
@@ -16,7 +15,7 @@ void setup()
 //int getMaxiMsgCount();
 //int getStayMsgCount();//remaining
 //void sendSMS(String number, String msg);
-//void doCall(String number); //Make call
+//void makeCall(String number); //Make call
 //String getUSSDRequest(String request);
 //String getAllMsg();
 //String getMsgContent(int n);
@@ -33,7 +32,7 @@ void setup()
 //boolean isKeyWordInLastMsg();
 // 
 Sim.setWaitingTime(300);
-  //Sim.doCall("69064632");
+  //Sim.makeCall("69064632");
   delay(5000);
   Serial.println("Waiting time:");
   
@@ -44,7 +43,7 @@ Sim.setWaitingTime(300);
   delay(10000);
   Serial.println("*124#");
   Serial.println(Sim.getUSSDRequest("*124#") );
-   delay(10000);
+  delay(10000);
    /*
   Serial.println("*400#");
   Serial.println(Sim.getUSSDRequest("*400#") );
