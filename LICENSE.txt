@@ -1,0 +1,11 @@
+GENERAL PUBLIC LICENSE YoupiLab Iot 
+                       Version October 2022
+
+ Copyright (C) 2022 Youpilab Iot, <https://iot.youpilab.com/>
+ Everyone is permitted to copy and distribute verbatim copies
+ of this license document, but modification of it is not permitted.
+
+                            Preamble
+
+  This license is intended to guarantee the authenticity
+   of this library so that developers can go about using it more quickly.
