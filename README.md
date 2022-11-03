@@ -1,45 +1,81 @@
-# SIM800_YL
-For SIM800 L
+## A repository to quickly use the different features of SIM800L
 
-# GSM
+We have made many functions for GMS utilities and HTTP
 
-## Tested functions
+### GSM
 
-1- String getUSSDRequest(String request): fonctionne.
+- Get USSD request
+- Make a call
+- Send a SMS
+- Get count of all messages send
+- Get the maximum messages which can be sent
+- Get the content of the last message
+- Get the sender of the last message
+- Get the date of the last message
+- Get the hour of the last message
+- Get list of all messages
+- Search a key word in a specific message
+- Search a key word in the last message
+- Delete a specific message 
+- Delete all messages
 
-2- void doCall(String number): fonctionne
+All these functions have been properly commented to your comprehension
 
-3- void sendSMS(String number, String msg):
+```
+ #include <sim800Lib.h>
 
-4- int getMsgCount(): fonctionne
+ Sim800Lib Sim(10,11);
 
-5- int getMaxiMsgCount(): fonctionne
+ String phone_number = ""; // Enter a phone number here
 
-6- String getLastMsgContent(): fonctionne
+ void setup()
+ {
+    Serial.begin(9600);
 
-7- String getLastMsgSender(): fonctionne
+    Sim.startModule(); // Start module to start using module's functionalities
 
-8- String getLastMsgDate(): fonctionne
+    Sim.setWaitingTime(300); // Set a waiting time
 
-9- String getLastMsgHour(): fonctionne
+    Sim.makeCall(phone_number); // make a call
 
-10- String getAllMsg(): pas très bien (ne liste pas tous les messages). Mais en récupérant le nombre de messages qu'il y a on peut ensuite itérer depuis le début (1) et utiliser les fonctions listées en haut
+    delay(5000);
 
-11 - boolean isKeyWordInMsg(int n): fonctionne
+    String message = "I love YoupiLab";
 
-12- boolean isKeyWordInLastMsg(): fonctionne
+    Sim.sendSMS(phone_number, message); //Send a sms to a phone number
 
-13- void deleteMsg(int n): fonctionne
+    Sim.getLastMsgContent() //Get the last message
 
-14- void deleteAllMsg(): fonctionne
+    Sim.getLastMsgSender(); // Get the last message you had sent
 
-# GPRS
+    Sim.getLastMsgDate(); //Get the date of the last message sent
 
-struct HTTPResponse {
-int status = 0;
-int size = 0;
-String response = "";
-};
+    Sim.getRemainingMessage(); // get the number of messages remaining
+
+    Sim.getMaxiMsgCount(); // get the maximum number of messages your sim can contain
+
+ }
+
+ void loop()
+ {
+
+ }
+```
+
+### GPRS
+
+[//]: # (struct HTTPResponse {)
+
+[//]: # (int status = 0;)
+
+[//]: # (int size = 0;)
+
+[//]: # (String response = "";)
+
+[//]: # (};)
+
+- one
+- two
 
 1- uint32_t HTTPRequestTimeout = 10000L;
 
