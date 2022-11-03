@@ -12,20 +12,37 @@ void Sim800Lib::setWaitingTime(int wTime) {
   }
 }
 
+/*
+  get the waiting time of the integrated sim
+*/
 int Sim800Lib::getWaitingTime() { return waitingTime; }
 
+/*
+  search and modify a key word
+*/
 void Sim800Lib::setKeyWord(String word) { keyWord = word; }
 
+/*
+  get a key word
+*/
 String Sim800Lib::getKeyWord() { return keyWord; }
 
+/*
+  Set the server expiration time
+*/
 void Sim800Lib::setServerTimeOut(int outTime) {
   if (outTime >= 0) {
     serverTimeOut = outTime;  // en ms
   }
 }
-
+/*
+  get the server expiration time
+*/
 int Sim800Lib::getServerTimeOut() { return serverTimeOut; }
 
+/*
+  reset the time expiration time
+*/
 void Sim800Lib::setResetTime(int rTime)  // rTime en minute
 {
   if (rTime >= 1) {
@@ -33,8 +50,14 @@ void Sim800Lib::setResetTime(int rTime)  // rTime en minute
   }
 }
 
+/*
+  get the server reset time
+*/
 int Sim800Lib::getResetTime() { return REPOP_TIME; }
 
+/*
+  count the number of messages sent on your sim
+*/
 int Sim800Lib::getMsgCount() {
   mySerial->println("AT+CPMS=\"SM\"");  // command to get the number of messages
                                         // sent and the capacity of the sim
@@ -57,6 +80,9 @@ int Sim800Lib::getMsgCount() {
   }
 }
 
+/*
+  get the maximum number of SMS that the sim can receive
+*/
 int Sim800Lib::getMaxiMsgCount() {
   mySerial->println("AT+CPMS=\"SM\"");  // command to get the number of messages
                                         // sent and the capacity of the sim
@@ -80,8 +106,14 @@ int Sim800Lib::getMaxiMsgCount() {
   }
 }
 
+/*
+  get Remaining Message number of SMS that the sim can receive
+*/
 int Sim800Lib::getRemainingMessage() { return (getMaxiMsgCount() - getMsgCount()); }
 
+/*
+  initialisation of instance
+*/
 Sim800Lib::Sim800Lib(int rx,
                      int tx)  // This is the constructor of the class with its initializations
 {
@@ -107,6 +139,9 @@ void Sim800Lib::startModule() {
   start();  // We call the private function that starts the module
 }
 
+/*
+  send an sms to phone number
+*/
 void Sim800Lib::sendSMS(String number, String msg) {
   mySerial->println("AT");           // AT is done to make sure the module works
   Serial.println(get_result(true));  // The module's response is displayed in the serial monitor
@@ -127,6 +162,9 @@ void Sim800Lib::sendSMS(String number, String msg) {
   delay(waitingTime);
 }
 
+/*
+  make call to phone number
+*/
 void Sim800Lib::makeCall(String number) {
   mySerial->println("AT");           // AT is done to make sure the module works
   Serial.println(get_result(true));  // The module's response is displayed in the serial monitor
@@ -137,18 +175,27 @@ void Sim800Lib::makeCall(String number) {
   delay(waitingTime);
 }
 
+/*
+  delete an sms, from the sim
+*/
 void Sim800Lib::deleteMsg(int n) {
   mySerial->println("AT+CMGD=" + intToString(n));  // Command to delete the message n
   Serial.println(get_result(true));
   delay(waitingTime);
 }
 
+/*
+  delete all sms, from the sim
+*/
 void Sim800Lib::deleteAllMsg() {
   mySerial->println("AT+CMGD=1,4");  // Command to delete all messages
   Serial.println(get_result(true));
   delay(waitingTime);
 }
 
+/*
+  listening to an incoming call
+*/
 int Sim800Lib::inListening(String number)  // Listening to the module: it can do everything
 {
   boolean hasRespond = false;     // booleen used to know the module has received information
@@ -191,6 +238,9 @@ bailout:
   return ret;
 }
 
+/*
+  get all message from sim
+*/
 String Sim800Lib::getAllMsg() {
   String s      = "";  // return variable
   int    _count = getMsgCount();
@@ -205,12 +255,12 @@ String Sim800Lib::getAllMsg() {
   return s;
 }
 
-String Sim800Lib::getUSSDRequest(String request) {
-  /*
-  mySerial->println("AT+CUSD=1");
+/*
+  get a USSD request
+*/
 
-  mySerial->println("AT+CSCS=\"GSM\"");
-  */
+String Sim800Lib::getUSSDRequest(String request) {
+ 
   mySerial->println("AT+CUSD=1,\"" + request + "\"");  // Command which allows to get USSD request
   String        _rep     = "";
   unsigned long _startMS = millis();
@@ -244,6 +294,9 @@ String Sim800Lib::getUSSDRequest(String request) {
   // return(_rep+"azerty");
 }
 
+/*
+  see the content of a sms in the sim.
+*/
 String Sim800Lib::getMsgContent(int n) {
   mySerial->println("AT+CMGR=" + intToString(n));  // Command which allows to have the
                                                    // information concerning the message n
@@ -278,6 +331,9 @@ String Sim800Lib::getMsgContent(int n) {
   }
 }
 
+/*
+  see the content of a sms that was sent in the sim.
+*/
 String Sim800Lib::getMsgSender(int n) {
   mySerial->println("AT+CMGR=" + intToString(n));  // Command which allows to have the
                                                    // information concerning the message n
@@ -311,6 +367,9 @@ String Sim800Lib::getMsgSender(int n) {
   }
 }
 
+/*
+  get the time of reception of an sms
+*/
 String Sim800Lib::getMsgHour(int n) {
   mySerial->println("AT+CMGR=" + intToString(n));  // Command which allows to have the
                                                    // information concerning the message n
@@ -356,6 +415,9 @@ String Sim800Lib::getMsgHour(int n) {
   }
 }
 
+/*
+  get the date of reception of an sms
+*/
 String Sim800Lib::getMsgDate(int n) {
   mySerial->println("AT+CMGR=" + intToString(n));  // Command which allows to have the
                                                    // information concerning the message n
@@ -401,19 +463,40 @@ String Sim800Lib::getMsgDate(int n) {
   }
 }
 
+/*
+get content the last sms received in the sim
+*/
 String Sim800Lib::getLastMsgContent() { return getMsgContent(getMsgCount()); }
 
+/*
+get content the last sms sent in the sim
+*/
 String Sim800Lib::getLastMsgSender() { return getMsgSender(getMsgCount()); }
 
+/*
+  get the date of the last message sent
+*/
 String Sim800Lib::getLastMsgDate() { return getMsgDate(getMsgCount()); }
 
+/*
+  get the hours of the last message sent
+*/
 String Sim800Lib::getLastMsgHour() { return getMsgHour(getMsgCount()); }
 
+/*
+check the existence of a word in a sms
+*/
 boolean Sim800Lib::isKeyWordInMsg(int n) { return isKeyWordIn(getMsgContent(n)); }
 
+/*
+  check the existence of a word of the last sms
+*/
 boolean Sim800Lib::isKeyWordInLastMsg() { return isKeyWordInMsg(getMsgCount()); }
 
 /************************** GPRS *************************/
+/*
+get the gprs results
+*/
 String Sim800Lib::get_result(boolean _clear, uint32_t timeout)  // Private function of reception of
                                                                 // the answers of the sim800
 {
@@ -455,7 +538,9 @@ bailout:
     }
   }
 }
-
+/*
+  extract APN Infos
+*/
 String Sim800Lib::extractAPNInfos(String &text) {
   size_t nbquote  = 0;
   String apnInfos = "";
@@ -471,6 +556,9 @@ String Sim800Lib::extractAPNInfos(String &text) {
   return apnInfos;
 }
 
+/*
+  get APN Infos
+*/
 String Sim800Lib::getAPNInfos() {
   mySerial->println("AT");
   Serial.println(get_result(true));
@@ -483,6 +571,9 @@ String Sim800Lib::getAPNInfos() {
   return extractAPNInfos(apnInfos);
 }
 
+/*
+  is APN Infos Set
+*/
 boolean Sim800Lib::isAPNInfosSet(String apn) {
   String apnInfos = getAPNInfos();
 
@@ -492,7 +583,9 @@ boolean Sim800Lib::isAPNInfosSet(String apn) {
 
   return false;
 }
-
+/*
+  set APN Infos
+*/
 void Sim800Lib::setAPNInfos(String apn, String user, String pwd) {
   // Serial.println(isAPNInfosSet(apn));
   if (!isAPNInfosSet(apn)) {
@@ -549,7 +642,9 @@ void Sim800Lib::setAPNInfos(String apn, String user, String pwd) {
     delay(waitingTime);
   }
 }
-
+/*
+  send an http request
+*/
 HTTPResponse Sim800Lib::sendRequest(String &url, int type, String contentType) {
   mySerial->println("AT");
   Serial.println(get_result(true));  // The module's response is displayed in the serial monitor
@@ -605,11 +700,17 @@ HTTPResponse Sim800Lib::sendRequest(String &url, int type, String contentType) {
 
   return res;
 }
-
+/*
+  get an http request
+*/
 HTTPResponse Sim800Lib::GET(String &url, String contentType) { return sendRequest(url, 0, contentType); }
-
+/*
+  post an http request
+*/
 HTTPResponse Sim800Lib::POST(String &url, String contentType) { return sendRequest(url, 1, contentType); }
-
+/*
+  verify is an http request
+*/
 boolean Sim800Lib::isHTTP(String &text)  // Check that a message is received
 {
   for (int i = 0; i < text.length(); i++) {
@@ -622,6 +723,9 @@ boolean Sim800Lib::isHTTP(String &text)  // Check that a message is received
   return false;
 }
 
+/*
+  work On HTTP Action
+*/
 void Sim800Lib::workOnHTTPAction(String response, int &code, int &sz) {
   // Serial.println(response);
   int index = response.indexOf("HTTPACTION:");
@@ -631,7 +735,9 @@ void Sim800Lib::workOnHTTPAction(String response, int &code, int &sz) {
   code = response.substring(indexVirgule + 1, indexVirgule + 4).toInt();
   sz   = response.substring(indexVirgule + 5).toInt();
 }
-
+/*
+  work On HTTP Read
+*/
 void Sim800Lib::workOnHTTPRead(String response, String &serverRes, int sz) {
   int index = response.indexOf(String(sz));
 
