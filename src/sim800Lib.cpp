@@ -1255,7 +1255,7 @@ char intToChar(int n) {
   if (n == 8) return '8';
   if (n == 9) return '9';
 }
-
+//pow of n
 int pow(int n) {
   int rep = 1;
   for (int i = 0; i < n; i++) {

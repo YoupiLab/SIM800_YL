@@ -18,6 +18,13 @@ We have made many functions for GMS utilities and HTTP
 - Search a key word in the last message
 - Delete a specific message 
 - Delete all messages
+- get the waiting time of the integrated sim
+- search and modify a key word
+- get a key word
+- check the existence of a word of the last sms
+- check the existence of a word in a sms
+- get the hours of the last message sent
+- get the date of the last message sent
 
 All these functions have been properly commented to your comprehension
 
@@ -73,9 +80,6 @@ All these functions have been properly commented to your comprehension
 [//]: # (String response = "";)
 
 [//]: # (};)
-
-- one
-- two
 
 1- uint32_t HTTPRequestTimeout = 10000L;
 
