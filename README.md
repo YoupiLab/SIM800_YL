@@ -29,9 +29,9 @@ We have made many functions for GMS utilities and HTTP
 All these functions have been properly commented to your comprehension
 
 ```
- #include <sim800Lib.h>
+ #include <YLSim800Lib.h>
 
- Sim800Lib Sim(10,11);
+ YLSim800Lib Sim(10,11);
 
  String phone_number = ""; // Enter a phone number here
 

@@ -1,5 +1,5 @@
-#ifndef Sim800Lib_h
-#define sim800Lib_h
+#ifndef YLSim800Lib_h
+#define YLSim800Lib_h
 
 #include <Arduino.h>
 #include <SoftwareSerial.h>
@@ -10,9 +10,9 @@ struct HTTPResponse {
   String response = "";
 };
 
-class Sim800Lib {
+class YLSim800Lib {
  public:
-  Sim800Lib(int rx, int tx);
+  YLSim800Lib(int rx, int tx);
   void    setWaitingTime(int wTime);
   int     getWaitingTime();
   void    setServerTimeOut(int outTime);

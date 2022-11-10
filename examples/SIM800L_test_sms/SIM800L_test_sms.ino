@@ -1,6 +1,6 @@
-#include <sim800Lib.h>
+#include <YLSim800Lib.h>
 
-Sim800Lib Sim(10,11);  // Le module est connecté aux pins
+YLSim800Lib Sim(10,11);  // Le module est connecté aux pins
 
 String phone_number = ""; // Enter a phone number here
 
